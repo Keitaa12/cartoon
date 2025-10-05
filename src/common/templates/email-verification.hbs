@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vérification de votre compte - CARTOON</title>
+    <style>
+        /* Reset CSS pour emails */
+        body, table, td, p, a, li, blockquote { -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+        table, td { mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+        img { -ms-interpolation-mode: bicubic; border: 0; outline: none; text-decoration: none; }
+        
+        /* Styles principaux */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+        
+        .email-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 30px 20px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 28px;
+            font-weight: 300;
+        }
+        
+        .content {
+            padding: 40px 30px;
+        }
+        
+        .welcome-message {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .verification-box {
+            background-color: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .verification-code {
+            font-size: 32px;
+            font-weight: bold;
+            color: #667eea;
+            letter-spacing: 5px;
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #ffffff;
+            border: 2px dashed #667eea;
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        .instructions {
+            font-size: 16px;
+            color: #666;
+            margin: 20px 0;
+            line-height: 1.8;
+        }
+        
+        .button {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 15px 30px;
+            border-radius: 25px;
+            font-weight: bold;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .footer {
+            background-color: #f8f9fa;
+            padding: 30px;
+            text-align: center;
+            border-top: 1px solid #e9ecef;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .security-note {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #856404;
+        }
+        
+        .expiry-info {
+            background-color: #d1ecf1;
+            border: 1px solid #bee5eb;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+            color: #0c5460;
+        }
+        
+        @media only screen and (max-width: 600px) {
+            .email-container {
+                width: 100% !important;
+            }
+            .content {
+                padding: 20px 15px !important;
+            }
+            .verification-code {
+                font-size: 24px !important;
+                letter-spacing: 3px !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🎉 Bienvenue sur CARTOON !</h1>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <div class="welcome-message">
+                Bonjour <strong>{{userName}}</strong>,
+            </div>
+            
+            <p class="instructions">
+                Merci de vous être inscrit sur CARTOON ! Pour activer votre compte et commencer à profiter de tous nos services, 
+                veuillez vérifier votre adresse email en utilisant le code de vérification ci-dessous.
+            </p>
+            
+            <div class="verification-box">
+                <h3 style="margin-top: 0; color: #333;">Code de vérification</h3>
+                <div class="verification-code">{{verificationCode}}</div>
+                <p style="margin-bottom: 0; color: #666;">
+                    Entrez ce code dans l'application pour vérifier votre compte
+                </p>
+            </div>
+            
+            <div class="expiry-info">
+                <strong>⏰ Important :</strong> Ce code expire dans 15 minutes pour des raisons de sécurité.
+            </div>
+            
+            <div class="security-note">
+                <strong>🔒 Sécurité :</strong> Ne partagez jamais ce code avec qui que ce soit. L'équipe CARTOON ne vous demandera jamais votre code de vérification.
+            </div>
+            
+            <p class="instructions">
+                Si vous n'avez pas créé de compte sur CARTOON, vous pouvez ignorer cet email en toute sécurité.
+            </p>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>CARTOON</strong> - Votre plateforme de contenu préférée</p>
+            <p>Cet email a été envoyé automatiquement, merci de ne pas y répondre.</p>
+            <p>&copy; {{currentYear}} CARTOON. Tous droits réservés.</p>
+        </div>
+    </div>
+</body>
+</html>
