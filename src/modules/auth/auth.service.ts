@@ -1,8 +1,13 @@
-import { BadRequestException, Injectable, NotFoundException, UnauthorizedException } from "@nestjs/common";
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+  UnauthorizedException,
+} from "@nestjs/common";
 import { LoginDto } from "./dto/login.dto";
 import { UserService } from "../user/user.service";
 import { User } from "src/common/database/entities/user.entity";
-import * as bcrypt from 'bcryptjs';
+import * as bcrypt from "bcryptjs";
 import { DEFAULT_JWT_EXPIRATION } from "src/common/constants/app.constants";
 import { JwtService } from "@nestjs/jwt";
 import { ForgotPasswordDto } from "./dto/forgot.password.dto";
@@ -18,7 +23,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly otpService: OtpService,
     private readonly emailService: EmailService,
-  ) { }
+  ) {}
 
   async login(dto: LoginDto) {
     const user = await this.validate(dto.email, dto.password);
@@ -32,7 +37,7 @@ export class AuthService {
     return {
       access_token: this.jwtService.sign(payload, {
         expiresIn: DEFAULT_JWT_EXPIRATION,
-        secret: process.env.JWT_CONTENTS_SECRET || 'iAmZombie',
+        secret: process.env.JWT_CONTENTS_SECRET || "iAmZombie",
       }),
       data: {
         id: user.id,
@@ -45,20 +50,19 @@ export class AuthService {
   }
 
   async validate(email: string, password: string): Promise<User> {
-    const findUser = await this.userService.findBy('email', email);
+    const findUser = await this.userService.findBy("email", email);
 
-    if (!findUser)
-      throw new UnauthorizedException("Vous n'êtes pas autorisé");
+    if (!findUser) throw new UnauthorizedException("Vous n'êtes pas autorisé");
 
-    const user = findUser as User;
+    const user = findUser;
 
     const valid = await bcrypt.compare(password, user.password);
     if (!valid)
-      throw new UnauthorizedException('Email ou mot de passe incorrect');
+      throw new UnauthorizedException("Email ou mot de passe incorrect");
 
     if (user.is_locked)
       throw new UnauthorizedException(
-        'Compte bloqué, veuillez connecter le super administrateur',
+        "Compte bloqué, veuillez connecter le super administrateur",
       );
 
     return user;
@@ -72,11 +76,11 @@ export class AuthService {
     const { email } = forgotPasswordDto;
 
     // Check if user exists and determine their type
-    const userInfo = await this.userService.findBy('email', email);
+    const userInfo = await this.userService.findBy("email", email);
 
     if (!userInfo) {
       throw new NotFoundException(
-        'Aucun compte trouvé avec cette adresse email',
+        "Aucun compte trouvé avec cette adresse email",
       );
     }
 
@@ -92,7 +96,7 @@ export class AuthService {
     const emailSent = await this.emailService.sendPasswordResetEmail(
       email,
       otp,
-      first_name + ' ' + last_name,
+      first_name + " " + last_name,
     );
 
     if (!emailSent) {
@@ -101,7 +105,7 @@ export class AuthService {
 
     return {
       statusCode: 200,
-      message: 'Un code de réinitialisation a été envoyé à votre adresse email',
+      message: "Un code de réinitialisation a été envoyé à votre adresse email",
     };
   }
 
@@ -124,14 +128,14 @@ export class AuthService {
       {
         email,
         resetId: passwordReset.id,
-        type: 'password_reset',
+        type: "password_reset",
       },
-      { expiresIn: '15m' },
+      { expiresIn: "15m" },
     );
 
     return {
       statusCode: 200,
-      message: 'Code OTP vérifié avec succès',
+      message: "Code OTP vérifié avec succès",
       resetToken,
     };
   }
@@ -146,7 +150,7 @@ export class AuthService {
 
     // Check if passwords match
     if (newPassword !== confirmPassword) {
-      throw new BadRequestException('Les mots de passe ne correspondent pas');
+      throw new BadRequestException("Les mots de passe ne correspondent pas");
     }
 
     // Verify reset token
@@ -155,36 +159,33 @@ export class AuthService {
       decodedToken = this.jwtService.verify(resetToken);
     } catch (error) {
       throw new BadRequestException(
-        'Token de réinitialisation invalide ou expiré',
+        "Token de réinitialisation invalide ou expiré",
       );
     }
 
     if (
-      decodedToken.type !== 'password_reset' ||
+      decodedToken.type !== "password_reset" ||
       decodedToken.email !== email
     ) {
-      throw new BadRequestException('Token de réinitialisation invalide');
+      throw new BadRequestException("Token de réinitialisation invalide");
     }
 
     // Hash the new password
     const hashedPassword = await bcrypt.hash(newPassword, 10);
 
     // Update password based on user type
-    const userInfo = await this.userService.findBy('email', email);
+    const userInfo = await this.userService.findBy("email", email);
 
     if (!userInfo) {
-      throw new NotFoundException('Utilisateur non trouvé');
+      throw new NotFoundException("Utilisateur non trouvé");
     }
 
     const { id } = userInfo;
-    await this.userService.updatePassword(
-      id,
-      hashedPassword,
-    );
+    await this.userService.updatePassword(id, hashedPassword);
 
     return {
       statusCode: 200,
-      message: 'Mot de passe réinitialisé avec succès',
+      message: "Mot de passe réinitialisé avec succès",
     };
   }
 }

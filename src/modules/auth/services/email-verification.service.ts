@@ -1,7 +1,7 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { MoreThan, Repository } from 'typeorm';
-import { EmailVerification } from 'src/common/database/entities/email-verification.entity';
+import { Injectable, BadRequestException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { MoreThan, Repository } from "typeorm";
+import { EmailVerification } from "src/common/database/entities/email-verification.entity";
 
 @Injectable()
 export class EmailVerificationService {
@@ -39,7 +39,10 @@ export class EmailVerificationService {
     return this.emailVerificationRepository.save(emailVerificationData);
   }
 
-  async verifyEmailCode(email: string, verificationCode: string): Promise<EmailVerification> {
+  async verifyEmailCode(
+    email: string,
+    verificationCode: string,
+  ): Promise<EmailVerification> {
     const emailVerification = await this.emailVerificationRepository.findOne({
       where: {
         email,
@@ -51,7 +54,7 @@ export class EmailVerificationService {
     });
 
     if (!emailVerification) {
-      throw new BadRequestException('Code de vérification invalide ou expiré');
+      throw new BadRequestException("Code de vérification invalide ou expiré");
     }
 
     return emailVerification;
@@ -63,10 +66,12 @@ export class EmailVerificationService {
     });
   }
 
-  async getVerificationByEmail(email: string): Promise<EmailVerification | null> {
+  async getVerificationByEmail(
+    email: string,
+  ): Promise<EmailVerification | null> {
     return this.emailVerificationRepository.findOne({
       where: { email },
-      order: { createdAt: 'DESC' },
+      order: { createdAt: "DESC" },
     });
   }
 }

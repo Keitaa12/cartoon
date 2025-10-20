@@ -1,10 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, Index } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  CreateDateColumn,
+  UpdateDateColumn,
+  Index,
+} from "typeorm";
 
-@Entity('email_verifications')
-@Index(['email', 'createdAt'])
-@Index(['expiresAt'], { expireAfterSeconds: 0 })
+@Entity("email_verifications")
+@Index(["email", "createdAt"])
+@Index(["expiresAt"], { expireAfterSeconds: 0 })
 export class EmailVerification {
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @Column({ unique: true })
@@ -19,10 +26,10 @@ export class EmailVerification {
   @Column({ default: false })
   isExpired: boolean;
 
-  @Column({ type: 'timestamp' })
+  @Column({ type: "timestamp" })
   expiresAt: Date;
 
-  @Column({ type: 'uuid' })
+  @Column({ type: "uuid" })
   userId: string;
 
   @CreateDateColumn()

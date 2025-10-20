@@ -1,26 +1,26 @@
-import { ApiProperty } from '@nestjs/swagger';
-import { User } from 'src/common/database/entities/user.entity';
+import { ApiProperty } from "@nestjs/swagger";
+import { User } from "src/common/database/entities/user.entity";
 import {
   CreateDateColumn,
   DeleteDateColumn,
   ManyToOne,
   UpdateDateColumn,
-} from 'typeorm';
+} from "typeorm";
 
 export default class BaseEntity {
   @CreateDateColumn({
-    name: 'created_at',
+    name: "created_at",
     update: false,
   })
   createdAt: Date;
 
   @UpdateDateColumn({
-    name: 'updated_at',
+    name: "updated_at",
   })
   updatedAt: Date;
 
   @DeleteDateColumn({
-    name: 'deleted_at',
+    name: "deleted_at",
   })
   deletedAt: Date;
 

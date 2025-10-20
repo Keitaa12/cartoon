@@ -1,9 +1,7 @@
-import { Injectable, BadRequestException } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
-import { MoreThan, Repository } from 'typeorm';
-import {
-  PasswordReset,
-} from 'src/common/database/entities/password-reset.entity';
+import { Injectable, BadRequestException } from "@nestjs/common";
+import { InjectRepository } from "@nestjs/typeorm";
+import { MoreThan, Repository } from "typeorm";
+import { PasswordReset } from "src/common/database/entities/password-reset.entity";
 
 @Injectable()
 export class OtpService {
@@ -53,7 +51,7 @@ export class OtpService {
     });
 
     if (!passwordReset) {
-      throw new BadRequestException('Code OTP invalide ou expiré');
+      throw new BadRequestException("Code OTP invalide ou expiré");
     }
 
     return passwordReset;

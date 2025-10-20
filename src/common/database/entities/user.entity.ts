@@ -1,12 +1,13 @@
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
-import { ApiProperty } from '@nestjs/swagger';
-import { UserRoleEnum } from 'src/common/enums/user-role.enum';
-import BaseEntity from 'src/common/entities/base.entities';
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
+import { ApiProperty } from "@nestjs/swagger";
+import { UserRoleEnum } from "src/common/enums/user-role.enum";
+import BaseEntity from "src/common/entities/base.entities";
+import { Company } from "./company.entity";
 
-@Entity('users')
+@Entity("users")
 export class User extends BaseEntity {
   @ApiProperty()
-  @PrimaryGeneratedColumn('uuid')
+  @PrimaryGeneratedColumn("uuid")
   id: string;
 
   @ApiProperty()
@@ -25,8 +26,8 @@ export class User extends BaseEntity {
   @Column()
   last_name: string;
 
-  @ApiProperty({ enum: ['admin', 'creator', 'user'] })
-  @Column({ type: 'enum', enum: UserRoleEnum })
+  @ApiProperty({ enum: ["admin", "creator", "user"] })
+  @Column({ type: "enum", enum: UserRoleEnum })
   role: UserRoleEnum;
 
   @ApiProperty()
@@ -36,6 +37,10 @@ export class User extends BaseEntity {
   @ApiProperty()
   @Column({ default: false })
   is_verified: boolean;
+
+  @ApiProperty({ required: false })
+  @ManyToOne(() => Company, { nullable: true })
+  company?: Company | null;
 
   @ApiProperty({ required: false })
   @ManyToOne(() => User, { nullable: true })

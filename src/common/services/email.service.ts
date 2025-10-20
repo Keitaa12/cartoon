@@ -1,12 +1,12 @@
-import { Injectable, Logger } from '@nestjs/common';
-import { MailerService } from '@nestjs-modules/mailer';
-import * as dotenv from 'dotenv';
+import { Injectable, Logger } from "@nestjs/common";
+import { MailerService } from "@nestjs-modules/mailer";
+import * as dotenv from "dotenv";
 
 dotenv.config();
 
 const EMAIL_FROM_ADDRESS: string =
-  process.env.EMAIL_FROM_ADDRESS || 'noreply@cartoon.com';
-const EMAIL_FROM_NAME: string = process.env.EMAIL_FROM_NAME || 'CARTOON';
+  process.env.EMAIL_FROM_ADDRESS || "noreply@cartoon.com";
+const EMAIL_FROM_NAME: string = process.env.EMAIL_FROM_NAME || "CARTOON";
 
 @Injectable()
 export class EmailService {
@@ -26,14 +26,14 @@ export class EmailService {
           address: EMAIL_FROM_ADDRESS,
         },
         to: email,
-        subject: 'Réinitialisation de mot de passe - CARTOON',
-        template: 'password-reset',
+        subject: "Réinitialisation de mot de passe - CARTOON",
+        template: "password-reset",
         context: {
           userName,
           otp,
           currentYear: new Date().getFullYear(),
           resetUrl: `${
-            process.env.FRONTEND_URL || 'https://app.cartoon.com'
+            process.env.FRONTEND_URL || "https://app.cartoon.com"
           }/reset-password?token=${otp}`,
         },
       });
@@ -70,8 +70,8 @@ export class EmailService {
           address: EMAIL_FROM_ADDRESS,
         },
         to: email,
-        subject: 'Vérification de votre compte - CARTOON',
-        template: 'email-verification',
+        subject: "Vérification de votre compte - CARTOON",
+        template: "email-verification",
         context: {
           userName,
           verificationCode,

@@ -1,39 +1,48 @@
-import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-import { ConfigService } from '@nestjs/config';
-import { ValidationPipe } from '@nestjs/common';
-import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
-import { NestExpressApplication } from '@nestjs/platform-express';
-import { join } from 'path';
+import { NestFactory } from "@nestjs/core";
+import { AppModule } from "./app.module";
+import { ConfigService } from "@nestjs/config";
+import { ValidationPipe } from "@nestjs/common";
+import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { NestExpressApplication } from "@nestjs/platform-express";
+import { join } from "path";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
   const configService = app.get<ConfigService>(ConfigService);
+
+  // Configuration CORS
+  app.enableCors({
+    origin: "*", // Pour le développement - à restreindre en production
+    methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+    credentials: true,
+    allowedHeaders: "Content-Type, Accept, Authorization",
+  });
+
   app.useGlobalPipes(new ValidationPipe({ transform: true }));
-  
+
   // Préfixe global pour toutes les routes
-  app.setGlobalPrefix('api');
-  
+  app.setGlobalPrefix("api");
+
   // Servir les fichiers statiques (images uploadées)
-  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
-    prefix: '/uploads/',
+  app.useStaticAssets(join(__dirname, "..", "uploads"), {
+    prefix: "/uploads/",
   });
 
   const config = new DocumentBuilder()
     .setContact(
-      configService.get('DEVELOPER_NAME') ?? '',
-      configService.get('DEVELOPER_PORTFOLIO') ?? '',
-      configService.get('DEVELOPER_MAIL') ?? '',
+      configService.get("DEVELOPER_NAME") ?? "",
+      configService.get("DEVELOPER_PORTFOLIO") ?? "",
+      configService.get("DEVELOPER_MAIL") ?? "",
     )
-    .setTitle(configService.get('APP_NAME') ?? '')
-    .setDescription(configService.get('APP_DESCRIPTION') ?? '')
-    .setVersion(configService.get('APP_VERSION') ?? '')
+    .setTitle(configService.get("APP_NAME") ?? "")
+    .setDescription(configService.get("APP_DESCRIPTION") ?? "")
+    .setVersion(configService.get("APP_VERSION") ?? "")
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
-  SwaggerModule.setup('api/docs', app, document);
-  
-  await app.listen(configService.get<number>('PORT', 3000));
+  SwaggerModule.setup("api/docs", app, document);
+
+  await app.listen(configService.get<number>("PORT", 3000));
 }
 bootstrap();

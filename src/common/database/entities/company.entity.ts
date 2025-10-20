@@ -3,15 +3,13 @@ import {
   PrimaryGeneratedColumn,
   Column,
   ManyToOne,
-  JoinColumn,
 } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 import BaseEntity from "src/common/entities/base.entities";
 import { User } from "./user.entity";
-import { Company } from "./company.entity";
 
-@Entity("chains")
-export class Chain extends BaseEntity {
+@Entity("companies")
+export class Company extends BaseEntity {
   @ApiProperty()
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -21,17 +19,44 @@ export class Chain extends BaseEntity {
   name: string;
 
   @ApiProperty()
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   description: string;
 
   @ApiProperty()
   @Column()
-  imageUrl: string;
+  address: string;
 
   @ApiProperty()
-  @ManyToOne(() => Company, { nullable: false })
-  @JoinColumn()
-  company: Company;
+  @Column({ nullable: true })
+  city: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  country: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  postal_code: string;
+
+  @ApiProperty()
+  @Column({ unique: true })
+  email: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  phone: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  website: string;
+
+  @ApiProperty()
+  @Column({ nullable: true })
+  logo_url: string;
+
+  @ApiProperty()
+  @Column({ default: true })
+  is_active: boolean;
 
   @ApiProperty({ required: false })
   @ManyToOne(() => User, { nullable: true })
