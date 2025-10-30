@@ -9,11 +9,10 @@ import {
 import { ApiProperty } from "@nestjs/swagger";
 import BaseEntity from "src/common/entities/base.entities";
 import { User } from "./user.entity";
-import { Company } from "./company.entity";
 import { Cartoon } from "./cartoon.entity";
 
-@Entity("chains")
-export class Chain extends BaseEntity {
+@Entity("category_cartoons")
+export class CategoryCartoon extends BaseEntity {
   @ApiProperty()
   @PrimaryGeneratedColumn("uuid")
   id: string;
@@ -23,17 +22,12 @@ export class Chain extends BaseEntity {
   name: string;
 
   @ApiProperty()
-  @Column({ type: "text" })
+  @Column({ type: "text", nullable: true })
   description: string;
 
   @ApiProperty()
-  @Column()
-  imageUrl: string;
-
-  @ApiProperty()
-  @ManyToOne(() => Company, { nullable: false })
-  @JoinColumn()
-  company: Company;
+  @Column({ nullable: true })
+  color: string;
 
   @ApiProperty({ required: false })
   @ManyToOne(() => User, { nullable: true })
@@ -44,6 +38,7 @@ export class Chain extends BaseEntity {
   updated_by?: User | null;
 
   @ApiProperty({ required: false })
-  @OneToMany(() => Cartoon, (cartoon) => cartoon.chain)
+  @OneToMany(() => Cartoon, (cartoon) => cartoon.categoryCartoon)
   cartoons?: Cartoon[];
 }
+
