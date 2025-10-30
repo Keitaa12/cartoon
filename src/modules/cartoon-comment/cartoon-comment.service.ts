@@ -203,22 +203,27 @@ export class CartoonCommentService {
       limit,
     );
 
-    const [comments, total] = await this.cartoonCommentRepository.findAndCount(
-      {
-        where: { cartoon: { id: cartoonId }, parentComment: IsNull() },
-        ...paginationOptions,
-        relations: ["cartoon", "user"],
-        order: { createdAt: "DESC" },
-      },
-    );
+    const [comments, total] = await this.cartoonCommentRepository.findAndCount({
+      where: { cartoon: { id: cartoonId }, parentComment: IsNull() },
+      ...paginationOptions,
+      relations: ["cartoon", "user"],
+      order: { createdAt: "DESC" },
+    });
 
-    return PaginationHelper.createPaginationResult(comments, page, limit, total);
+    return PaginationHelper.createPaginationResult(
+      comments,
+      page,
+      limit,
+      total,
+    );
   }
 
   /**
    * Récupérer les réponses à un commentaire
    */
-  async findByParentComment(parentCommentId: string): Promise<CartoonComment[]> {
+  async findByParentComment(
+    parentCommentId: string,
+  ): Promise<CartoonComment[]> {
     return await this.cartoonCommentRepository.find({
       where: { parentComment: { id: parentCommentId } },
       relations: ["user"],
@@ -240,4 +245,3 @@ export class CartoonCommentService {
     return comment;
   }
 }
-

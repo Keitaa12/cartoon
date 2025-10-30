@@ -1,9 +1,4 @@
-import {
-  Entity,
-  PrimaryGeneratedColumn,
-  Column,
-  ManyToOne,
-} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from "typeorm";
 import { ApiProperty } from "@nestjs/swagger";
 import BaseEntity from "src/common/entities/base.entities";
 import { User } from "./user.entity";

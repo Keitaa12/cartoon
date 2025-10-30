@@ -29,4 +29,3 @@ export class CategoryCartoonResponseDto {
     this.updatedAt = categoryCartoon.updatedAt;
   }
 }
-

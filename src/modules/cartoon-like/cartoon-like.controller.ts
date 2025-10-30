@@ -73,7 +73,10 @@ export class CartoonLikeController {
     description: "Statut du like récupéré avec succès",
   })
   async isLiked(@Param("cartoonId") cartoonId: string, @Req() req: any) {
-    const liked = await this.cartoonLikeService.isLiked(cartoonId, req.user.sub);
+    const liked = await this.cartoonLikeService.isLiked(
+      cartoonId,
+      req.user.sub,
+    );
     return {
       statusCode: HttpStatus.OK,
       message: "Statut du like récupéré avec succès",
@@ -104,4 +107,3 @@ export class CartoonLikeController {
     };
   }
 }
-

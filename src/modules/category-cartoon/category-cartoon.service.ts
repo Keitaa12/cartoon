@@ -122,12 +122,11 @@ export class CategoryCartoonService {
       limit,
     );
 
-    const [categories, total] = await this.categoryCartoonRepository.findAndCount(
-      {
+    const [categories, total] =
+      await this.categoryCartoonRepository.findAndCount({
         ...paginationOptions,
         order: { name: "ASC" },
-      },
-    );
+      });
 
     return PaginationHelper.createPaginationResult(
       categories,
@@ -151,4 +150,3 @@ export class CategoryCartoonService {
     return category;
   }
 }
-

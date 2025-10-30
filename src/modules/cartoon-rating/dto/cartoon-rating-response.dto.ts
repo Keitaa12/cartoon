@@ -29,4 +29,3 @@ export class CartoonRatingResponseDto {
     this.updatedAt = cartoonRating.updatedAt;
   }
 }
-

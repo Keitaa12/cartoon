@@ -189,8 +189,7 @@ export class CartoonController {
   })
   @ApiOperation({
     summary: "Modifier un dessin animé",
-    description:
-      "Permet à un CREATOR de modifier un dessin animé de sa chaîne",
+    description: "Permet à un CREATOR de modifier un dessin animé de sa chaîne",
   })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -251,4 +250,3 @@ export class CartoonController {
     };
   }
 }
-

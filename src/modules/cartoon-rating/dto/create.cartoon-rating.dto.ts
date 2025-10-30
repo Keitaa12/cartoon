@@ -12,4 +12,3 @@ export class CreateCartoonRatingDto {
   @Max(5, { message: "La note doit être inférieure ou égale à 5." })
   rating: number;
 }
-

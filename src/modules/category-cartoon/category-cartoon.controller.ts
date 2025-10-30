@@ -52,10 +52,7 @@ export class CategoryCartoonController {
     status: HttpStatus.BAD_REQUEST,
     description: "Données invalides",
   })
-  async create(
-    @Body() dto: CreateCategoryCartoonDto,
-    @Req() req: any,
-  ) {
+  async create(@Body() dto: CreateCategoryCartoonDto, @Req() req: any) {
     const category = await this.categoryCartoonService.create(dto, req.user);
     return {
       statusCode: HttpStatus.CREATED,
@@ -67,7 +64,8 @@ export class CategoryCartoonController {
   @Get()
   @ApiOperation({
     summary: "Lister toutes les catégories",
-    description: "Récupère toutes les catégories de dessins animés sans pagination (publique)",
+    description:
+      "Récupère toutes les catégories de dessins animés sans pagination (publique)",
   })
   @ApiResponse({
     status: HttpStatus.OK,
@@ -224,4 +222,3 @@ export class CategoryCartoonController {
     };
   }
 }
-

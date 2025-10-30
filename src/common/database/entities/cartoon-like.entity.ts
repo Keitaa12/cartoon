@@ -31,4 +31,3 @@ export class CartoonLike extends BaseEntity {
   @ManyToOne(() => User, { nullable: true })
   created_by?: User | null;
 }
-

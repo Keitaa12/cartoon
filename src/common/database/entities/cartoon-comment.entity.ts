@@ -48,4 +48,3 @@ export class CartoonComment extends BaseEntity {
   @ManyToOne(() => User, { nullable: true })
   updated_by?: User | null;
 }
-

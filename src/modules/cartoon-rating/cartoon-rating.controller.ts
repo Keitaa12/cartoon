@@ -132,10 +132,7 @@ export class CartoonRatingController {
     status: HttpStatus.OK,
     description: "Note de l'utilisateur récupérée avec succès",
   })
-  async getMyRating(
-    @Param("cartoonId") cartoonId: string,
-    @Req() req: any,
-  ) {
+  async getMyRating(@Param("cartoonId") cartoonId: string, @Req() req: any) {
     const rating = await this.cartoonRatingService.findByUserAndCartoon(
       cartoonId,
       req.user.sub,
@@ -175,4 +172,3 @@ export class CartoonRatingController {
     };
   }
 }
-

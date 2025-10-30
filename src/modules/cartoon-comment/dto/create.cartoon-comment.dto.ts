@@ -1,9 +1,17 @@
-import { IsNotEmpty, IsString, MinLength, MaxLength, IsOptional, IsUUID } from "class-validator";
+import {
+  IsNotEmpty,
+  IsString,
+  MinLength,
+  MaxLength,
+  IsOptional,
+  IsUUID,
+} from "class-validator";
 import { ApiProperty } from "@nestjs/swagger";
 
 export class CreateCartoonCommentDto {
   @ApiProperty({
-    example: "Super dessin animé ! J'ai beaucoup aimé l'histoire et les personnages.",
+    example:
+      "Super dessin animé ! J'ai beaucoup aimé l'histoire et les personnages.",
     description: "Contenu du commentaire",
   })
   @IsNotEmpty({ message: "Le contenu du commentaire est obligatoire." })
@@ -22,7 +30,8 @@ export class CreateCartoonCommentDto {
     required: false,
   })
   @IsOptional()
-  @IsUUID(4, { message: "L'ID du commentaire parent doit être un UUID valide." })
+  @IsUUID(4, {
+    message: "L'ID du commentaire parent doit être un UUID valide.",
+  })
   parentCommentId?: string;
 }
-

@@ -4,4 +4,3 @@ import { CreateCategoryCartoonDto } from "./create.category-cartoon.dto";
 export class UpdateCategoryCartoonDto extends PartialType(
   CreateCategoryCartoonDto,
 ) {}
-

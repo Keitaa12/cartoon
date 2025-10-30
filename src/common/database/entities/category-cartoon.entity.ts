@@ -41,4 +41,3 @@ export class CategoryCartoon extends BaseEntity {
   @OneToMany(() => Cartoon, (cartoon) => cartoon.categoryCartoon)
   cartoons?: Cartoon[];
 }
-

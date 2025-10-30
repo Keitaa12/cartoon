@@ -77,7 +77,8 @@ export class CartoonCommentController {
   })
   @ApiOperation({
     summary: "Récupérer tous les commentaires d'un dessin animé",
-    description: "Récupère tous les commentaires d'un dessin animé avec pagination",
+    description:
+      "Récupère tous les commentaires d'un dessin animé avec pagination",
   })
   @ApiQuery({
     name: "page",
@@ -112,7 +113,9 @@ export class CartoonCommentController {
     return {
       statusCode: HttpStatus.OK,
       message: "Liste des commentaires récupérée avec succès",
-      data: result.data.map((comment) => new CartoonCommentResponseDto(comment)),
+      data: result.data.map(
+        (comment) => new CartoonCommentResponseDto(comment),
+      ),
       pagination: result.pagination,
     };
   }
@@ -131,12 +134,9 @@ export class CartoonCommentController {
     status: HttpStatus.OK,
     description: "Réponses récupérées avec succès",
   })
-  async findByParentComment(
-    @Param("parentCommentId") parentCommentId: string,
-  ) {
-    const replies = await this.cartoonCommentService.findByParentComment(
-      parentCommentId,
-    );
+  async findByParentComment(@Param("parentCommentId") parentCommentId: string) {
+    const replies =
+      await this.cartoonCommentService.findByParentComment(parentCommentId);
     return {
       statusCode: HttpStatus.OK,
       message: "Réponses récupérées avec succès",
@@ -232,4 +232,3 @@ export class CartoonCommentController {
     };
   }
 }
-

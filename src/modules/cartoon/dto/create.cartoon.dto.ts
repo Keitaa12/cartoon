@@ -15,7 +15,9 @@ export class CreateCartoonDto {
     description: "URL de l'image de fond",
   })
   @IsNotEmpty({ message: "L'URL de l'image de fond est obligatoire." })
-  @IsString({ message: "L'URL de l'image de fond doit être une chaîne de caractères." })
+  @IsString({
+    message: "L'URL de l'image de fond doit être une chaîne de caractères.",
+  })
   @IsUrl({}, { message: "L'URL de l'image de fond doit être une URL valide." })
   imageBackgroundUrl: string;
 
@@ -24,7 +26,9 @@ export class CreateCartoonDto {
     description: "URL de la vidéo",
   })
   @IsNotEmpty({ message: "L'URL de la vidéo est obligatoire." })
-  @IsString({ message: "L'URL de la vidéo doit être une chaîne de caractères." })
+  @IsString({
+    message: "L'URL de la vidéo doit être une chaîne de caractères.",
+  })
   @IsUrl({}, { message: "L'URL de la vidéo doit être une URL valide." })
   videoUrl: string;
 
@@ -61,4 +65,3 @@ export class CreateCartoonDto {
   @IsUUID(4, { message: "L'ID de la catégorie doit être un UUID valide." })
   categoryCartoonId?: string;
 }
-

@@ -56,4 +56,3 @@ export class CartoonResponseDto {
     this.updatedAt = cartoon.updatedAt;
   }
 }
-

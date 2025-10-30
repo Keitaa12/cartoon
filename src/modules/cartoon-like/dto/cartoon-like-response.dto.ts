@@ -21,4 +21,3 @@ export class CartoonLikeResponseDto {
     this.createdAt = cartoonLike.createdAt;
   }
 }
-

@@ -33,7 +33,11 @@ export class CartoonService {
   /**
    * Créer un dessin animé pour une chaîne de l'entreprise de l'utilisateur connecté
    */
-  async create(dto: CreateCartoonDto, chainId: string, user: any): Promise<Cartoon> {
+  async create(
+    dto: CreateCartoonDto,
+    chainId: string,
+    user: any,
+  ): Promise<Cartoon> {
     // Récupérer l'utilisateur complet avec sa relation company
     const fullUser = await this.userRepository.findOne({
       where: { id: user.sub },
@@ -98,7 +102,9 @@ export class CartoonService {
     });
 
     if (!reloadedCartoon) {
-      throw new NotFoundException("Erreur lors du rechargement du dessin animé");
+      throw new NotFoundException(
+        "Erreur lors du rechargement du dessin animé",
+      );
     }
 
     return reloadedCartoon;
@@ -163,7 +169,9 @@ export class CartoonService {
     });
 
     if (!reloadedCartoon) {
-      throw new NotFoundException("Erreur lors du rechargement du dessin animé");
+      throw new NotFoundException(
+        "Erreur lors du rechargement du dessin animé",
+      );
     }
 
     return reloadedCartoon;
@@ -230,7 +238,12 @@ export class CartoonService {
       order: { createdAt: "DESC" },
     });
 
-    return PaginationHelper.createPaginationResult(cartoons, page, limit, total);
+    return PaginationHelper.createPaginationResult(
+      cartoons,
+      page,
+      limit,
+      total,
+    );
   }
 
   /**
@@ -264,7 +277,12 @@ export class CartoonService {
       order: { createdAt: "DESC" },
     });
 
-    return PaginationHelper.createPaginationResult(cartoons, page, limit, total);
+    return PaginationHelper.createPaginationResult(
+      cartoons,
+      page,
+      limit,
+      total,
+    );
   }
 
   /**
@@ -281,4 +299,3 @@ export class CartoonService {
     return cartoon;
   }
 }
-

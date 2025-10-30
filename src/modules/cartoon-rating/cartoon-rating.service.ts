@@ -36,10 +36,7 @@ export class CartoonRatingService {
 
     if (ratings.length === 0) {
       // Si aucune note, définir la moyenne à 0
-      await this.cartoonRepository.update(
-        { id: cartoonId },
-        { ratings: 0 },
-      );
+      await this.cartoonRepository.update({ id: cartoonId }, { ratings: 0 });
       return;
     }
 
@@ -209,4 +206,3 @@ export class CartoonRatingService {
     });
   }
 }
-

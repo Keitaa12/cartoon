@@ -27,4 +27,3 @@ import { CommonModule } from "src/common/common.module";
   exports: [CartoonService],
 })
 export class CartoonModule {}
-
