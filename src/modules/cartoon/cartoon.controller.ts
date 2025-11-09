@@ -35,7 +35,7 @@ export class CartoonController {
 
   @Post("chain/:chainId")
   @UseGuards(JwtAuthGuard, RolesGuard)
-  @Roles(UserRoleEnum.CREATOR)
+  @Roles(UserRoleEnum.CREATOR, UserRoleEnum.ADMIN)
   @ApiBearerAuth()
   @ApiParam({
     name: "chainId",
