@@ -48,11 +48,11 @@ export class CartoonService {
       throw new BadRequestException("Utilisateur non trouvé");
     }
 
-    if (!fullUser.company) {
+    /* if (!fullUser.company) {
       throw new BadRequestException(
         "Vous devez être associé à une entreprise pour créer un dessin animé",
       );
-    }
+    } */
 
     // Vérifier que la chaîne existe et appartient à l'entreprise de l'utilisateur
     const chain = await this.chainRepository.findOne({
