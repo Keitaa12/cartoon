@@ -64,11 +64,11 @@ export class CartoonService {
       throw new NotFoundException("Chaîne non trouvée");
     }
 
-    if (chain.company.id !== fullUser.company.id) {
+    /* if (chain.company.id !== fullUser.company.id) {
       throw new ForbiddenException(
         "Vous n'êtes pas autorisé à créer un dessin animé pour cette chaîne",
       );
-    }
+    } */
 
     // Récupérer la catégorie si elle est fournie
     let categoryCartoon: CategoryCartoon | null = null;
