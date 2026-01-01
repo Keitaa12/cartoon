@@ -45,7 +45,7 @@ export class CartoonService {
     });
 
     if (!fullUser) {
-      throw new BadRequestException("Utilisateur non trouvé");
+      throw new BadRequestException("Utilisateur non trouvé"); 
     }
 
     /* if (!fullUser.company) {
