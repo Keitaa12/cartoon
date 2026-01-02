@@ -28,7 +28,7 @@ export class CartoonService {
     private chainRepository: Repository<Chain>,
     @InjectRepository(User)
     private userRepository: Repository<User>,
-  ) {}
+  ) { }
 
   /**
    * Créer un dessin animé pour une chaîne de l'entreprise de l'utilisateur connecté
@@ -45,7 +45,7 @@ export class CartoonService {
     });
 
     if (!fullUser) {
-      throw new BadRequestException("Utilisateur non trouvé"); 
+      throw new BadRequestException("Utilisateur non trouvé");
     }
 
     /* if (!fullUser.company) {
