@@ -29,7 +29,7 @@ import { PaginationDto } from "src/common/dto/pagination.dto";
 @ApiTags("Chain")
 @Controller("chain")
 export class ChainController {
-  constructor(private readonly chainService: ChainService) {}
+  constructor(private readonly chainService: ChainService) { }
 
   @Post()
   @UseGuards(JwtAuthGuard, RolesGuard)

@@ -23,7 +23,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly otpService: OtpService,
     private readonly emailService: EmailService,
-  ) {}
+  ) { }
 
   async login(dto: LoginDto) {
     const user = await this.validate(dto.email, dto.password);
